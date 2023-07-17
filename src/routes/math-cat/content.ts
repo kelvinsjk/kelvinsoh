@@ -71,7 +71,7 @@ const steps = [
     ${math(`${roots[0]}, ${roots[1]}`)} and ${math(`${-c}`)}.
     Let's plot them out on a number line
     ${newParagraph}
-    NUMBERLINE
+    <img src="svgs/Number_Line_1.svg" alt="number_line_regions" class="content-svg" />
     ${newParagraph}    
     We notice that the number line is now broken up into 4 regions which we
     name ${math(`A,B,C`)} and ${math(`D.`)}
@@ -92,7 +92,7 @@ const steps = [
     Repeating this analysis over regions ${math(`C`)}
     and ${math(`D`)} gives us the following picture:
     ${newParagraph}
-    NUMBERLINE2
+    <img src="svgs/Number_Line_2.svg" alt="number_line_regions_positive_and_negative" class="content-svg" />
     ${newParagraph}`,
     info: `An alternative method to the analysis above will be a "test point" method, where
       we substitute test values (e.g. ${math(`x=3`)} for region ${math(`A`)} and ${math(`x=1.5`)} for region ${math(`B`)})

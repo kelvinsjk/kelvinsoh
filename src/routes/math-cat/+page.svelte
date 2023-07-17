@@ -16,22 +16,9 @@
   import { vars } from './variables';
   import { getRandomInt } from 'mathlify';
   import { qnGen } from '$lib/qnGen/01-eqns/q010101';
+	import { tick } from 'svelte';
   let variables = getNewVars();
   $: [qn, ans, soln] = qnGen(variables);
-
-  // make heights match
-  let height: number;
-  let div: HTMLDivElement;
-  $: setMaxHeight(learnActive);
-  function setMaxHeight(learnActive: boolean): void {
-    if (div){
-      if (learnActive) {
-        div.style.height = '100%';
-      } else {
-        div.style.height = `${height}px`;
-      }
-    }
-  }
 
   type Variables = typeof vars[0];
   function getNewVars(): Variables {
@@ -65,6 +52,7 @@
       class="tab tab-lifted"
       class:tab-active={!learnActive}
       on:click={() => setLearnActive(false)}
+      id="practice-tab"
     >
     {#if !learnActive}
       <div class="highlight" in:fly={{x: -200, duration: 500}}></div>
@@ -73,38 +61,42 @@
     </button> 
   </div>
   <div class="body">
-    <label class="swap swap-flip">
+    <label class="swap swap-flip w-full place-content-stretch">
       <input type="checkbox" disabled checked={learnActive} />
-      <div class="swap-on" bind:this={div}>
-        <h2 class="mt-2">Example with comments</h2>
-        <h3>Question</h3>
-        {@html body}
-        <h3>Solution</h3>
-        {#each steps as step,i}
-        <h4>Step {i}. {step.title}</h4>
+      <div class="swap-on">
+        {#if learnActive}
         <div>
-          {@html step.body}
-        </div>
-        {#if "info" in step}
-        <div class="alert">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-info shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-          <div>{@html step.info}</div>
+          <h2 class="mt-2">Example with comments</h2>
+          <h3>Question</h3>
+          {@html body}
+          <h3>Solution</h3>
+          {#each steps as step,i}
+          <h4>Step {i}. {step.title}</h4>
+          <div>
+            {@html step.body}
+          </div>
+          {#if "info" in step}
+          <div class="alert">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-info shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <div>{@html step.info}</div>
+          </div>
+          {/if}
+          {/each}
+          <h2>Practice</h2>
+          <button 
+            class="btn btn-secondary"
+            on:click={async () => {setLearnActive(false); await tick(); console.log('hi'); document.getElementById('practice-tab')?.scrollIntoView();}}
+          >
+            Try out this technique
+            <img src="/icons/edit.svg" class="h-6 w-6 my-0" alt="practice"/>
+          </button>
         </div>
         {/if}
-        {/each}
-        <h2>Practice</h2>
-        <button 
-          class="btn btn-secondary"
-          on:click={() => {setLearnActive(false); window.scroll({top: 0});}}
-        >
-          Try out this technique
-          <img src="/icons/edit.svg" class="h-6 w-6 my-0" alt="practice"/>
-        </button>
       </div>
       <div class="swap-off">
         <div>
-          <h2 class="mt-2">Question</h2>
-          <div bind:offsetHeight={height}>
+          <h2 class="mt-2" id="qn">Question</h2>
+          <div>
             Solve the following inequality
             {#key variables}
             <div in:scale>
@@ -157,10 +149,10 @@
     The next technique will tackle the case if our quadratic
     is not factorizable because it has no real roots
   </p>
-  <a class="btn btn-primary" href="./02-positive">
+  <button class="btn btn-primary btn-disabled">
     Positive Quadratics
     <img src="/icons/next-white.svg" class="h-6 w-6 my-0 text-white" alt="next"/>
-  </a>
+  </button>
 </main>
 
 
