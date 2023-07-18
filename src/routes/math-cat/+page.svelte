@@ -85,7 +85,7 @@
           <h2>Practice</h2>
           <button 
             class="btn btn-secondary"
-            on:click={async () => {setLearnActive(false); await tick(); console.log('hi'); document.getElementById('practice-tab')?.scrollIntoView();}}
+            on:click={async () => {setLearnActive(false); await tick(); document.getElementById('practice-tab')?.scrollIntoView();}}
           >
             Try out this technique
             <img src="/icons/edit.svg" class="h-6 w-6 my-0" alt="practice"/>
