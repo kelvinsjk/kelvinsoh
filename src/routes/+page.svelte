@@ -108,9 +108,13 @@
 			The mathematical projects above are powered by my open source libraries
 			<a href="https://www.npmjs.com/package/mathlify">Mathlify</a> (JavaScript computer algebra
 			system that integrates calculations with typesetting) and
-			<a href="https://www.npmjs.com/package/mathlifier?activeTab=readme">Mathlifier</a> (an quick wrapper
-			around KaTeX to display math on the web). The latter is actually used by other developers to power
-			math content on their blogs.
+			<a href="https://www.npmjs.com/package/mathlifier?activeTab=readme">Mathlifier</a> (library to
+			enable cross-platform (web and print) math content). The latter is actually used by other developers
+			to power math content on their blogs.
+		</p>
+		<h3>Others</h3>
+		<p>
+			My other projects can be found on <a href="https://github.com/kelvinsjk">GitHub</a>.
 		</p>
 		<h2>Just for Fun</h2>
 		<p>Some fun simple applets that everyone can use!</p>
